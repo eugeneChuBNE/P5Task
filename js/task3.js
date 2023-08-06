@@ -59,6 +59,23 @@ function draw(){
     fill(255, 0, 0); // Different color for distinction
     ellipse(smallMoonX, smallMoonY, smallMoonSize);
 
+    // Calculate distances of each moon from the planet's center
+    let distYellowMoon = dist(moonYellowX, moonYellowY, planetX, planetY);
+    let distWhiteMoon = dist(moonWhiteX, moonWhiteY, planetX, planetY);
+
+    // Decide circle color based on which moon is closest
+    let centerCircleColor;
+    if (distYellowMoon < distWhiteMoon) {
+        centerCircleColor = color(255, 255, 0); // Yellow
+    } else {
+        centerCircleColor = color(255); // White
+    }
+
+    // Draw the circle at the planet's center with the determined color
+    fill(centerCircleColor);
+    let circleSize = planetSize / 4; // Adjust this value to make the circle smaller or bigger
+    ellipse(planetX, planetY, circleSize);
+
     // Incrementing angles for the moons' movement
     angleYellow += 1; 
     angleWhite += 0.5; 
