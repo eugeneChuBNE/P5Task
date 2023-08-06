@@ -1,58 +1,59 @@
 "use strict";
-let planetSize = 50;
+let planetSize = 50; 
 let moonSize = planetSize / 2;
+let smallerMoonSize = moonSize / 2; // New variable
 
 let angleYellow = 0;
 let angleWhite = 0;
+let angleSmaller = 0; // New variable
 
-function setup() {
-  createCanvas(800, 600);
-  ellipseMode(CENTER); // Ensure that ellipses are drawn from the center
+function setup(){
+    createCanvas(800,800);
 }
 
-function draw() {
-  background(0); // Black background
-
-  // Calculate planet's center
-  let planetX = width / 2;
-  let planetY = height / 2;
-
-  // Draw the grey half (left)
-  fill(150);
-  arc(planetX, planetY, planetSize, planetSize, PI / 2, 3 * PI / 2);
+function draw(){
+    background(0); 
   
-  // Draw the white half (right)
-  fill(255);
-  arc(planetX, planetY, planetSize, planetSize, -PI / 2, PI / 2);
+    let planetX = width / 2;
+    let planetY = height / 2;
 
-  // Angular arithmetic for the position of the moons
-  angleMode(DEGREES);
+    fill(150);
+    arc(planetX, planetY, planetSize, planetSize, PI, PI*2);
 
-  // Yellow moon (horizontal ellipse orbit)
-  let moonYellowX = planetX + (planetSize / 2 + moonSize / 2) * 5 * cos(angleYellow);
-  let moonYellowY = planetY + (planetSize + moonSize) * sin(angleYellow);
+    fill(255); 
+    arc(planetX, planetY, planetSize, planetSize,0, PI);
+    
+    angleMode(DEGREES);
 
-  // White moon (vertical ellipse orbit)
-  let moonWhiteX = planetX + (planetSize + moonSize) * cos(angleWhite);
-  let moonWhiteY = planetY + (planetSize / 2 + moonSize / 2) * 5 * sin(angleWhite);
+    let moonYellowX = planetX + (planetSize / 2 + moonSize / 2) * 5 * cos(angleYellow);
+    let moonYellowY = planetY + (planetSize + moonSize) * sin(angleYellow);
 
-  // Drawing tracks for moons
-  stroke(255, 255, 0, 50); // Transparent yellow for the yellow moon's track
-  noFill();
-  ellipse(planetX, planetY, (planetSize + moonSize) * 5, (planetSize + moonSize) * 2);
+    let moonWhiteX = planetX + (planetSize + moonSize) * cos(angleWhite);
+    let moonWhiteY = planetY + (planetSize / 2 + moonSize / 2) * 5 * sin(angleWhite);
 
-  stroke(255, 50); // Transparent white for the white moon's track
-  ellipse(planetX, planetY, (planetSize + moonSize) * 2, (planetSize + moonSize) * 5);
+    // Drawing tracks for moons
+    stroke(255, 255, 0, 50);
+    noFill();
+    ellipse(planetX, planetY, (planetSize + moonSize) * 5, (planetSize + moonSize) * 2);
 
-  // Drawing the moons
-  fill(255, 255, 0); // Yellow color for yellow moon
-  noStroke();
-  ellipse(moonYellowX, moonYellowY, moonSize);
+    stroke(255, 50);
+    ellipse(planetX, planetY, (planetSize + moonSize) * 2, (planetSize + moonSize) * 5);
 
-  fill(255); // White color for white moon
-  ellipse(moonWhiteX, moonWhiteY, moonSize);
+    // Drawing the moons
+    fill(255, 255, 0); 
+    noStroke();
+    ellipse(moonYellowX, moonYellowY, moonSize);
 
-  // Incrementing angles for the moons' movement
-  angleYellow += 1; // Adjust this for faster/slower speed
-  angleWhite += 0.5; // Adjust this for faster/slower speed
+    fill(255); 
+    ellipse(moonWhiteX, moonWhiteY, moonSize);
+
+    // Smaller moon
+    let smallMoonX = moonWhiteX + (moonSize + smallerMoonSize) * cos(angleSmaller);
+    let smallMoonY = moonWhiteY + (moonSize + smallerMoonSize) * sin(angleSmaller);
+    fill(100, 100, 255); 
+    ellipse(smallMoonX, smallMoonY, smallerMoonSize);
+
+    angleYellow += 1; 
+    angleWhite += 0.5; 
+    angleSmaller += 2;
 }

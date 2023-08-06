@@ -1,9 +1,11 @@
 "use strict";
 let planetSize = 50; //set the planet size
 let moonSize = planetSize / 2;
+let smallMoonSize = moonSize / 2;
 
 let angleYellow = 0;
 let angleWhite = 0;
+let angleSmlMoon = 0;
 
 function setup(){
     createCanvas(800,800);
@@ -51,9 +53,16 @@ function draw(){
     fill(255); // White color for white moon
     ellipse(moonWhiteX, moonWhiteY, moonSize);
 
+    // Smaller moon orbiting the white moon
+    let smallMoonX = moonWhiteX + (moonSize + smallMoonSize) * cos(angleSmlMoon);
+    let smallMoonY = moonWhiteY + (moonSize + smallMoonSize) * sin(angleSmlMoon);
+    fill(255, 0, 0); // Different color for distinction
+    ellipse(smallMoonX, smallMoonY, smallMoonSize);
+
     // Incrementing angles for the moons' movement
     angleYellow += 1; 
     angleWhite += 0.5; 
+    angleSmlMoon += 2;
 }
 
 
